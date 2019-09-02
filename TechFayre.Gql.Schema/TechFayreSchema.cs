@@ -1,15 +1,16 @@
 ﻿using GraphQL.Types;
 using System;
+using TechFayre.Gql.Models;
 
 namespace TechFayre.Gql.Schemas
 {
     public class TechFayreSchema : Schema
     {
-        public TechFayreSchema()
+        public TechFayreSchema(PostRepository postRepository)
         {
-            Query = new TechFayreQuery();
-            Mutation = new TechFayreMutation();
-            Subscription = new TechFayreSubscriptions();
+            Query = new TechFayreQuery(postRepository);
+            //Mutation = new TechFayreMutation();
+            //Subscription = new TechFayreSubscriptions();
         }
     }
 }

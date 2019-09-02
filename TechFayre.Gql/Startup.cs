@@ -8,6 +8,13 @@ using GraphQL.Server.Ui.Playground;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Voyager;
 using TechFayre.Gql.Schemas;
+using GraphQL;
+using GraphQL.Http;
+using TechFayre.Gql.Models;
+using System.Collections.Generic;
+using TechFayre.Gql.Schemas.Type;
+using TechFayre.Gql.Schemas.InputType;
+using System;
 
 namespace TechFayre.Gql
 {
@@ -22,29 +29,44 @@ namespace TechFayre.Gql
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<PostRepository>();
+            services.AddSingleton<TechFayreSchema>();
+            services.AddSingleton<TechFayreQuery>();
+            services.AddSingleton<TechFayreMutation>();
+            services.AddSingleton<TechFayreSubscriptions>();
+            services.AddSingleton<PostType>();
+            services.AddSingleton<PostInputType>();
+
+            services.AddGraphQL(options =>
+            {
+                options.EnableMetrics = true;
+            })
+            .AddDataLoader();
+
             services.AddMvc();
-            services.AddDbContext<CarvedRockDbContext>(options =>
-                options.UseSqlServer(_config["ConnectionStrings:CarvedRock"]));
-            services.AddSingleton<ProductRepository>();
+
+            //services.AddDbContext<CarvedRockDbContext>(options =>
+            //    options.UseSqlServer(_config["ConnectionStrings:CarvedRock"]));
+            //services.AddSingleton<ProductRepository>();
         }
 
-        public void Configure(IApplicationBuilder app, CarvedRockDbContext dbContext)
+        public void Configure(IApplicationBuilder app)
         {
-            app.UseMvc();
-            app.UseWebSockets();
-            dbContext.Seed();
-
-            // this is required for websockets support
             app.UseWebSockets();
 
-            // use HTTP middleware for ChatSchema at path /graphql
             app.UseGraphQL<TechFayreSchema>("/graphql");
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+            {
+                Path = "/ui/playground"
+            });
 
-            // use graphql-playground middleware at default url /ui/playground
-            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+            app.UseGraphQLVoyager(new GraphQLVoyagerOptions
+            {
+                GraphQLEndPoint = "/graphql",
+                Path = "/ui/voyager"
+            });
 
-            // use voyager middleware at default url /ui/voyager
-            app.UseGraphQLVoyager(new GraphQLVoyagerOptions());
+            app.UseMvc();
         }
     }
 }

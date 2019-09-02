@@ -5,7 +5,13 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechFayre.Gql.Api", "TechFayre.Gql\TechFayre.Gql.Api.csproj", "{81C7A112-94D5-40C7-B28A-2C2356E71B0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechFayre.Gql.Schemas", "TechFayre.Gql.Schema\TechFayre.Gql.Schemas.csproj", "{94241695-5219-47D6-B972-CBE91F903134}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechFayre.Gql.Schemas", "TechFayre.Gql.Schema\TechFayre.Gql.Schemas.csproj", "{94241695-5219-47D6-B972-CBE91F903134}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechFayre.Gql.Models", "TechFayre.Gql.Models\TechFayre.Gql.Models.csproj", "{853146AF-0D89-4FA5-BF19-320289BA2DC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{1B3608F0-F84B-405B-84A5-B5E57392A9C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Schema", "Schema", "{3E42989B-1057-44A7-8C84-3C0047F32FAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +27,17 @@ Global
 		{94241695-5219-47D6-B972-CBE91F903134}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94241695-5219-47D6-B972-CBE91F903134}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94241695-5219-47D6-B972-CBE91F903134}.Release|Any CPU.Build.0 = Release|Any CPU
+		{853146AF-0D89-4FA5-BF19-320289BA2DC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{853146AF-0D89-4FA5-BF19-320289BA2DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{853146AF-0D89-4FA5-BF19-320289BA2DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{853146AF-0D89-4FA5-BF19-320289BA2DC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{94241695-5219-47D6-B972-CBE91F903134} = {3E42989B-1057-44A7-8C84-3C0047F32FAB}
+		{853146AF-0D89-4FA5-BF19-320289BA2DC6} = {1B3608F0-F84B-405B-84A5-B5E57392A9C2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3596467E-00E0-4519-8FD6-11F3A4805E8D}

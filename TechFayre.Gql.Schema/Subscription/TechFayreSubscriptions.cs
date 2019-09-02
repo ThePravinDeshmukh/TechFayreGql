@@ -2,7 +2,7 @@
 
 namespace TechFayre.Gql.Schemas
 {
-    internal class TechFayreSubscriptions : ObjectGraphType
+    public class TechFayreSubscriptions : ObjectGraphType
     {
     }
 }

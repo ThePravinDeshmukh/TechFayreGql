@@ -2,7 +2,7 @@
 
 namespace TechFayre.Gql.Schemas
 {
-    internal class TechFayreMutation : ObjectGraphType
+    public class TechFayreMutation : ObjectGraphType
     {
     }
 }
