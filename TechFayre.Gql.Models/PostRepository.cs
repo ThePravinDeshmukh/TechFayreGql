@@ -27,5 +27,15 @@ namespace TechFayre.Gql.Models
 
             return response2.Data;
         }
+
+        public Post CreatePost(Post post)
+        {
+            var request = new RestRequest("posts", Method.POST);
+            request.AddJsonBody(post);
+
+            IRestResponse<Post> response2 = client.Execute<Post>(request);
+
+            return response2.Data;
+        }
     }
 }

@@ -12,4 +12,8 @@
     <ProjectReference Include="..\TechFayre.Gql.Models\TechFayre.Gql.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Arguments\" />
+  </ItemGroup>
+
 </Project>

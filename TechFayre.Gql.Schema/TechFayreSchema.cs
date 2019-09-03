@@ -9,7 +9,7 @@ namespace TechFayre.Gql.Schemas
         public TechFayreSchema(PostRepository postRepository)
         {
             Query = new TechFayreQuery(postRepository);
-            //Mutation = new TechFayreMutation();
+            Mutation = new TechFayreMutation(postRepository);
             //Subscription = new TechFayreSubscriptions();
         }
     }
