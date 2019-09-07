@@ -6,20 +6,22 @@ using TechFayre.Gql.Models.Entities;
 
 namespace TechFayre.Gql.Schemas.Type
 {
-    public class PostType: ObjectGraphType<Post>
+    public class BlogType: ObjectGraphType<Blog>
     {
-        public PostType()
+        public BlogType()
         {
             Field(o => o.Id);
             Field(o => o.Title);
             Field(o => o.Author);
-            //Field(o => o.Comments, false, typeof(MessageFromType)).Resolve(ResolveFrom);
+            Field<ListGraphType<CommentType>>(nameof(Blog.Comments));
+
+            //Field(o => o.Comments, false, typeof(CommentType)).Resolve(ResolveComment);
         }
 
-        //private MessageFrom ResolveFrom(ResolveFieldContext<Message> context)
+        //private Comment ResolveComment(ResolveFieldContext<Comment> context)
         //{
         //    var message = context.Source;
-        //    return message.From;
+        //    return message.c;
         //}
     }
 }

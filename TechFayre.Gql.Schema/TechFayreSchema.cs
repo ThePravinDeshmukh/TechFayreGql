@@ -6,10 +6,10 @@ namespace TechFayre.Gql.Schemas
 {
     public class TechFayreSchema : Schema
     {
-        public TechFayreSchema(PostRepository postRepository)
+        public TechFayreSchema(BlogRepository blogRepository)
         {
-            Query = new TechFayreQuery(postRepository);
-            Mutation = new TechFayreMutation(postRepository);
+            Query = new TechFayreQuery(blogRepository);
+            Mutation = new TechFayreMutation(blogRepository);
             //Subscription = new TechFayreSubscriptions();
         }
     }

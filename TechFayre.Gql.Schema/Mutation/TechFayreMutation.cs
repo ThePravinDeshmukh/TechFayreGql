@@ -8,17 +8,17 @@ namespace TechFayre.Gql.Schemas
 {
     public class TechFayreMutation : ObjectGraphType
     {
-        public TechFayreMutation(PostRepository postRepository)
+        public TechFayreMutation(BlogRepository blogRepository)
         {
-            Field<PostType>("CreatePost",
+            Field<BlogType>("CreateBlog",
     arguments: new QueryArguments(
-        new QueryArgument<PostInputType> { Name = "post" }
+        new QueryArgument<BlogInputType> { Name = "blog" }
     ),
     resolve: context =>
     {
-        var post = context.GetArgument<Post>("post");
-        var postOut = postRepository.CreatePost(post);
-        return postOut;
+        var blog = context.GetArgument<BlogBase>("blog");
+        var blogOut = blogRepository.CreateBlog(blog);
+        return blogOut;
     });
         }
     }

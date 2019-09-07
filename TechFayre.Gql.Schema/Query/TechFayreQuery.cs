@@ -7,11 +7,13 @@ namespace TechFayre.Gql.Schemas
 {
     public class TechFayreQuery : ObjectGraphType
     {
-        public TechFayreQuery(PostRepository postsRepository)
+        public TechFayreQuery(BlogRepository blogRepository)
         {
-            Field<ListGraphType<PostType>>("posts", resolve: context => postsRepository.GetAllPosts());
+            Field<ListGraphType<BlogType>>("blogs", resolve: context => blogRepository.GetAllBlogs());
 
-            Field<ListGraphType<PostType>>("post", resolve: context => postsRepository.GetPostById(0));
+            Field<ListGraphType<BlogType>>("blog", resolve: context => blogRepository.GetBlogById(0));
+
+            Field<ListGraphType<CommentType>>("comments", resolve: context => blogRepository.GetAllComments());
         }
     }
 }

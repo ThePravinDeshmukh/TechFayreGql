@@ -5,13 +5,14 @@ using System.Text;
 
 namespace TechFayre.Gql.Schemas.InputType
 {
-    public class PostInputType : InputObjectGraphType
+    public class BlogInputType : InputObjectGraphType
     {
-        public PostInputType()
+        public BlogInputType()
         {
-            Field<StringGraphType>("id");
             Field<StringGraphType>("title");
             Field<StringGraphType>("author");
+
+            Field<ListGraphType<CommentInputType>>("comments");
         }
     }
 }
