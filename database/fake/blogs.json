@@ -1,0 +1,20 @@
+{
+  "blogs": [
+    {
+      "Title": "Cosmos",
+      "Author": "Carl",
+      "id": 1
+    }
+  ],
+  "comments": [
+    {
+      "Body": "good blog",
+      "Name": "steve",
+      "blogId": "1",
+      "id": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

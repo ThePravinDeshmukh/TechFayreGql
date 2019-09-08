@@ -12,7 +12,7 @@ namespace TechFayre.Gql.Schemas.InputType
             Field<StringGraphType>("title");
             Field<StringGraphType>("author");
 
-            Field<ListGraphType<CommentInputType>>("comments");
+            //Field<ListGraphType<CommentInputType>>("comments");
         }
     }
 }

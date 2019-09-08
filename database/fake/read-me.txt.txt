@@ -1,0 +1,1 @@
+json-server --watch blogs.json --port 3003

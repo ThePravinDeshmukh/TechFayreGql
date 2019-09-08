@@ -12,7 +12,7 @@ namespace TechFayre.Gql.Models.Entities
     }
     public class BlogBase
     {
-        
+
         public string Title { get; set; }
         public string Author { get; set; }
     }

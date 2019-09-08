@@ -10,7 +10,7 @@ namespace TechFayre.Gql.Schemas.Type
     {
         public BlogType()
         {
-            Field(o => o.Id);
+            Field(o => o.Id, type: typeof(IdGraphType));
             Field(o => o.Title);
             Field(o => o.Author);
             Field<ListGraphType<CommentType>>(nameof(Blog.Comments));

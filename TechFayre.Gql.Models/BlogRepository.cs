@@ -32,11 +32,24 @@ namespace TechFayre.Gql.Models
         public Blog CreateBlog(BlogBase blog)
         {
             var request = new RestRequest("blogs", Method.POST);
+            
             request.AddJsonBody(blog);
 
-            IRestResponse<Blog> response2 = client.Execute<Blog>(request);
+            IRestResponse<Blog> response = client.Execute<Blog>(request);
 
-            return response2.Data;
+
+            return response.Data;
+        }
+
+        public Comment CreateComment(Comment comment)
+        {
+
+            var request = new RestRequest($"blogs/{comment.BlogId}/comments", Method.POST);
+            request.AddJsonBody(comment.ToParent());
+
+            IRestResponse<Comment> response = client.Execute<Comment>(request);
+
+            return response.Data;
         }
 
         public object GetAllComments()

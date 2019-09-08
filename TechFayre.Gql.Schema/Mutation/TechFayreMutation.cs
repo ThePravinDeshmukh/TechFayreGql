@@ -10,16 +10,40 @@ namespace TechFayre.Gql.Schemas
     {
         public TechFayreMutation(BlogRepository blogRepository)
         {
+            BlogMutation(blogRepository);
+
+            CommentMutation(blogRepository);
+        }
+
+        private void BlogMutation(BlogRepository blogRepository)
+        {
             Field<BlogType>("CreateBlog",
-    arguments: new QueryArguments(
-        new QueryArgument<BlogInputType> { Name = "blog" }
-    ),
-    resolve: context =>
-    {
-        var blog = context.GetArgument<BlogBase>("blog");
-        var blogOut = blogRepository.CreateBlog(blog);
-        return blogOut;
-    });
+            arguments: new QueryArguments(
+                new QueryArgument<BlogInputType> { Name = "blog" }
+            ),
+            resolve: context =>
+            {
+                var blog = context.GetArgument<BlogBase>("blog");
+                var blogOut = blogRepository.CreateBlog(blog);
+
+                return blogOut;
+            });
+        }
+
+        private void CommentMutation(BlogRepository blogRepository)
+        {
+            Field<CommentType>("CreateComment",
+            arguments: new QueryArguments(
+                new QueryArgument<NonNullGraphType<CommentInputType>> { Name = "comment" }
+            ),
+            resolve: context =>
+            {
+                var comment = context.GetArgument<Comment>("comment");
+                var commentOut = blogRepository.CreateComment(comment);
+
+                return commentOut;
+            });
+
         }
     }
 }
