@@ -1,0 +1,13 @@
+query
+{
+  blogs(title:"Human Evolution")
+  {
+    id
+    author
+    title
+    comments {
+      name
+      body
+    }
+  }
+}

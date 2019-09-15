@@ -5,14 +5,35 @@ using TechFayre.Gql.Models.Entities;
 
 namespace TechFayre.Gql.Models
 {
-    public class BlogRepository
+
+    public interface IBlogRepository
+    {
+        Blog CreateBlog(BlogBase blog);
+
+        Comment CreateComment(Comment comment);
+
+        List<Blog> GetAllBlogs(int id, string title, string author);
+
+        List<Comment> GetAllCommentsByBlogId(int blogId);
+
+        Blog GetBlogById(int Id);
+    }
+
+    public class BlogRepository : IBlogRepository
     {
         RestClient client = new RestClient("http://localhost:3003");
 
-        public List<Blog> GetAllBlogs()
+        public List<Blog> GetAllBlogs(int id, string title, string author)
         {
             // http://localhost:3003/blogs/?_embed=comments
-            var request = new RestRequest("blogs/?_embed=comments", Method.GET);
+            var request = new RestRequest("blogs", Method.GET);
+
+            if (id != 0)
+                request.AddParameter("id", id);
+            if (!string.IsNullOrEmpty(title))
+                request.AddParameter("Title", title);
+            if (!string.IsNullOrEmpty(author))
+                request.AddParameter("Author", author);
 
             IRestResponse<List<Blog>> response2 = client.Execute<List<Blog>>(request);
 
@@ -21,7 +42,7 @@ namespace TechFayre.Gql.Models
 
         public Blog GetBlogById(int Id)
         {
-            var request = new RestRequest("blogs/{id}/?_embed=comments", Method.GET);
+            var request = new RestRequest("blogs/{id}/", Method.GET);
             request.AddUrlSegment("id", Id);
 
             IRestResponse<Blog> response2 = client.Execute<Blog>(request);
@@ -32,11 +53,10 @@ namespace TechFayre.Gql.Models
         public Blog CreateBlog(BlogBase blog)
         {
             var request = new RestRequest("blogs", Method.POST);
-            
+
             request.AddJsonBody(blog);
 
             IRestResponse<Blog> response = client.Execute<Blog>(request);
-
 
             return response.Data;
         }
@@ -52,10 +72,12 @@ namespace TechFayre.Gql.Models
             return response.Data;
         }
 
-        public object GetAllComments()
+        public List<Comment> GetAllCommentsByBlogId(int blogId)
         {
             // http://localhost:3003/blogs/?_embed=comments
             var request = new RestRequest("comments/", Method.GET);
+
+            request.AddParameter("blogId", blogId);
 
             IRestResponse<List<Comment>> response2 = client.Execute<List<Comment>>(request);
 

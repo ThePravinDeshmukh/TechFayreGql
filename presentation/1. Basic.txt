@@ -1,0 +1,5 @@
+Talk about query, mutation and subscriptions
+... more features such as Alias, Directives, Fragments, Variables
+
+Validations
+... more custom validation rules

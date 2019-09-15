@@ -29,13 +29,20 @@ namespace TechFayre.Gql
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<BlogRepository>();
+            services.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
+
+            services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
+            services.AddSingleton<IDocumentWriter, DocumentWriter>();
+
+            services.AddSingleton<IBlogRepository, BlogRepository>();
             services.AddSingleton<TechFayreSchema>();
             services.AddSingleton<TechFayreQuery>();
             services.AddSingleton<TechFayreMutation>();
             services.AddSingleton<TechFayreSubscriptions>();
             services.AddSingleton<BlogType>();
             services.AddSingleton<BlogInputType>();
+            services.AddSingleton<CommentType>();
+            services.AddSingleton<CommentInputType>();
 
             services.AddGraphQL(options =>
             {

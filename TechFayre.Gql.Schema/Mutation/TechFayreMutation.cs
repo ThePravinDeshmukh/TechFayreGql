@@ -8,14 +8,14 @@ namespace TechFayre.Gql.Schemas
 {
     public class TechFayreMutation : ObjectGraphType
     {
-        public TechFayreMutation(BlogRepository blogRepository)
+        public TechFayreMutation(IBlogRepository blogRepository)
         {
             BlogMutation(blogRepository);
 
             CommentMutation(blogRepository);
         }
 
-        private void BlogMutation(BlogRepository blogRepository)
+        private void BlogMutation(IBlogRepository blogRepository)
         {
             Field<BlogType>("CreateBlog",
             arguments: new QueryArguments(
@@ -30,7 +30,7 @@ namespace TechFayre.Gql.Schemas
             });
         }
 
-        private void CommentMutation(BlogRepository blogRepository)
+        private void CommentMutation(IBlogRepository blogRepository)
         {
             Field<CommentType>("CreateComment",
             arguments: new QueryArguments(

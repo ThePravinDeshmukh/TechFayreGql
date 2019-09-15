@@ -1,0 +1,8 @@
+query
+{
+  comments(blogId:2)
+  {
+    name 
+    body
+  }
+}

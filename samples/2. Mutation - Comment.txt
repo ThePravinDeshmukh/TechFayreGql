@@ -1,0 +1,18 @@
+mutation CreateComment($comment: CommentInputType!) {
+  createComment(comment: $comment) {
+    name
+    body
+    blogId
+    id
+  }
+}
+
+--variable
+
+{
+  "comment": {
+    "name": "babatunde",
+    "body": "very nice",
+    "blogId": 2
+  }
+}

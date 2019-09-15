@@ -1,0 +1,12 @@
+query
+{
+  blog(id:1)
+  {
+    author
+    comments {
+      name 
+      body
+    }
+    title
+  }
+}

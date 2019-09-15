@@ -4,14 +4,31 @@
       "Title": "Cosmos",
       "Author": "Carl",
       "id": 1
+    },
+    {
+      "Title": "Human Evolution",
+      "Author": "Neil",
+      "id": 2
     }
   ],
   "comments": [
     {
       "Body": "good blog",
       "Name": "steve",
-      "blogId": "1",
-      "id": 1
+      "id": 1,
+      "blogId": 1
+    },
+    {
+      "Body": "interesting",
+      "Name": "brian",
+      "blogId": 1,
+      "id": 2
+    },
+    {
+      "Body": "very nice",
+      "Name": "babatunde",
+      "blogId": "2",
+      "id": 3
     }
   ],
   "profile": {

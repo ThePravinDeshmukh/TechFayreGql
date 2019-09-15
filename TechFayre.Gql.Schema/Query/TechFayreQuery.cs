@@ -7,13 +7,51 @@ namespace TechFayre.Gql.Schemas
 {
     public class TechFayreQuery : ObjectGraphType
     {
-        public TechFayreQuery(BlogRepository blogRepository)
+        public TechFayreQuery(IBlogRepository blogRepository)
         {
-            Field<ListGraphType<BlogType>>("blogs", resolve: context => blogRepository.GetAllBlogs());
+            //Field<ListGraphType<BlogType>>("blogs", resolve: context => blogRepository.GetAllBlogs(0,null,null));
 
-            Field<ListGraphType<BlogType>>("blog", resolve: context => blogRepository.GetBlogById(0));
+            Field<ListGraphType<BlogType>>("blogs",
+              arguments: new QueryArguments(
+                new QueryArgument<IdGraphType> { Name = "id" },
+                new QueryArgument<StringGraphType> { Name = "title", Description = "Title of the blog" },
+                new QueryArgument<StringGraphType> { Name = "author", Description = "Author name of the blog" }
+              ),
+                resolve: context =>
+                {
+                    var id = context.GetArgument<int>("id");
+                    var title = context.GetArgument<string>("title");
+                    var author = context.GetArgument<string>("author");
 
-            Field<ListGraphType<CommentType>>("comments", resolve: context => blogRepository.GetAllComments());
+                    return blogRepository.GetAllBlogs(id, title, author);
+                });
+
+            Field<BlogType>(
+              "blog",
+              arguments: new QueryArguments(
+                new QueryArgument<IdGraphType> { Name = "id" }
+              ),
+              resolve: context =>
+              {
+                  var id = context.GetArgument<int>("id");
+
+                  return blogRepository.GetBlogById(id);
+              }
+            );
+
+            Field<ListGraphType<CommentType>>(
+              "comments",
+              arguments: new QueryArguments(
+                new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "blogId", Description="Id of the blog you want to view comments from" }
+              ),
+              resolve: context =>
+              {
+                  var blogId = context.GetArgument<int>("blogId");
+
+                  return blogRepository.GetAllCommentsByBlogId(blogId);
+              }
+            );
+            
         }
     }
 }

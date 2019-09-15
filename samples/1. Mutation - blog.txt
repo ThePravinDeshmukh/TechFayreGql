@@ -1,0 +1,20 @@
+mutation CreateBlog($blog: BlogInputType!) {
+  createBlog(blog: $blog) {
+    id
+    author
+    title
+    comments {
+      name
+      body
+    }
+  }
+}
+
+--variable
+
+{
+  "blog": {
+    "author": "Neil",
+    "title": "Human Evolution"
+  }
+}
