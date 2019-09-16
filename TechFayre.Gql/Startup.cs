@@ -35,6 +35,7 @@ namespace TechFayre.Gql
             services.AddSingleton<IDocumentWriter, DocumentWriter>();
 
             services.AddSingleton<IBlogRepository, BlogRepository>();
+            services.AddSingleton<RequestRepository>();
             services.AddSingleton<TechFayreSchema>();
             services.AddSingleton<TechFayreQuery>();
             services.AddSingleton<TechFayreMutation>();
@@ -43,6 +44,7 @@ namespace TechFayre.Gql
             services.AddSingleton<BlogInputType>();
             services.AddSingleton<CommentType>();
             services.AddSingleton<CommentInputType>();
+            services.AddSingleton<RequestType>();
 
             services.AddGraphQL(options =>
             {
@@ -51,6 +53,8 @@ namespace TechFayre.Gql
             .AddDataLoader();
 
             services.AddMvc();
+
+            //services.AddWebSockets();
 
             //services.AddDbContext<CarvedRockDbContext>(options =>
             //    options.UseSqlServer(_config["ConnectionStrings:CarvedRock"]));
@@ -62,6 +66,7 @@ namespace TechFayre.Gql
             app.UseWebSockets();
 
             app.UseGraphQL<TechFayreSchema>("/graphql");
+
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
                 Path = "/ui/playground"
@@ -72,6 +77,8 @@ namespace TechFayre.Gql
                 GraphQLEndPoint = "/graphql",
                 Path = "/ui/voyager"
             });
+
+            //app.UseGraphQLWebSockets<TechFayreSchema>("/graphql");
 
             app.UseMvc();
         }

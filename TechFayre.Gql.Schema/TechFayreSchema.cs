@@ -7,12 +7,12 @@ namespace TechFayre.Gql.Schemas
 {
     public class TechFayreSchema : Schema
     {
-        public TechFayreSchema(IBlogRepository blogRepository, IDependencyResolver resolver)
+        public TechFayreSchema(IBlogRepository blogRepository, IDependencyResolver resolver, RequestRepository requestRepository)
             : base(resolver)
         {
             Query = new TechFayreQuery(blogRepository);
             Mutation = new TechFayreMutation(blogRepository);
-            //Subscription = new TechFayreSubscriptions();
+            Subscription = new TechFayreSubscriptions(requestRepository);
         }
     }
 }
